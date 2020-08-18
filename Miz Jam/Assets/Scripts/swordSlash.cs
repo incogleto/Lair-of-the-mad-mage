@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class projectile : MonoBehaviour
+public class swordSlash : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -17,11 +17,9 @@ public class projectile : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if(other.tag == "Player"){
-            Debug.Log("oof");
-        }
-        else if(other.tag == "walls"){
-            Destroy(gameObject);
+        if(other.tag == "enemies")
+        {
+            other.gameObject.BroadcastMessage("OnHit");
         }
     }
 }
