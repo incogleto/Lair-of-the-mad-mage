@@ -128,6 +128,7 @@ public class faceEnemy : MonoBehaviour
         isActive = true;
     }
 
+    //fix for getting stuck when colliding with multiple walls
     IEnumerator NoCollide()
     {
         wallCollide = false;

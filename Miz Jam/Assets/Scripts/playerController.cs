@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class playerController : MonoBehaviour
 {
@@ -26,6 +27,7 @@ public class playerController : MonoBehaviour
     private bool flipped = false;
 
     private bool isInvulnerable = false;
+    private bool isDead = false;
 
     private bool slashing = false;
 
@@ -41,7 +43,7 @@ public class playerController : MonoBehaviour
 
     private void Update ()
     {
-        if(!rolling)
+        if(!rolling && !isDead)
         {
             speed = 8.0f;
             m_move = m_MoveAction.ReadValue<Vector2> ();
@@ -79,7 +81,13 @@ public class playerController : MonoBehaviour
                 flipped = false;
             }
         }
-
+        if(currentHP <= 0)
+        {
+            anim.SetTrigger("death");
+            isDead = true;
+            rb.velocity = Vector2.zero;
+            dust.Stop();
+        }
     }
 
     public void OnMove (InputValue value)
@@ -102,19 +110,31 @@ public class playerController : MonoBehaviour
 
     public void OnSwing(InputValue value)
     {
-        Vector3 dir =  Mouse.current.position.ReadValue();
-        dir = Camera.main.ScreenToWorldPoint(dir);
-        dir = transform.position - dir;
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        if(!slashing){
-            if(angle >= -45 && angle < 45)
-                StartCoroutine(SwingSwordLeft());
-            else if(angle >= 45 && angle < 135)
-                StartCoroutine(SwingSwordDown());
-            else if(angle >= 135 || angle < -135)
-                StartCoroutine(SwingSwordRight());
-            else if(angle >= -135 && angle < -45)
-                StartCoroutine(SwingSwordUp());
+        if(!rolling && !isDead)
+        {
+            Vector3 dir =  Mouse.current.position.ReadValue();
+            dir = Camera.main.ScreenToWorldPoint(dir);
+            dir = transform.position - dir;
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            if(!slashing){
+                if(angle >= -45 && angle < 45)
+                    StartCoroutine(SwingSwordLeft());
+                else if(angle >= 45 && angle < 135)
+                    StartCoroutine(SwingSwordDown());
+                else if(angle >= 135 || angle < -135)
+                    StartCoroutine(SwingSwordRight());
+                else if(angle >= -135 && angle < -45)
+                    StartCoroutine(SwingSwordUp());
+            }
+        }
+    }
+
+    public void OnRestart(InputValue value)
+    {
+        if(isDead)
+        {
+            Scene scene = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(scene.name);
         }
     }
 
@@ -186,7 +206,7 @@ public class playerController : MonoBehaviour
 
     public void OnHit()
     {
-        if(!rolling && !isInvulnerable)
+        if(!rolling && !isInvulnerable && !isDead)
         {
             currentHP--;
             StartCoroutine(BecomeInvulnerable());

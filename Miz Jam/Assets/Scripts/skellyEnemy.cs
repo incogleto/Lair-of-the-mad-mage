@@ -27,7 +27,8 @@ public class skellyEnemy : MonoBehaviour
         {
             //transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime );
             //rb.MovePosition(Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime ));
-            rb.velocity = player.transform.position - transform.position;
+            Vector2 dir = player.transform.position - transform.position;
+            rb.velocity = dir.normalized * speed;
         }
     }
 
