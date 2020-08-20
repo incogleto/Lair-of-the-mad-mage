@@ -10,6 +10,7 @@ public class faceEnemy : MonoBehaviour
     public Animator anim;
     public GameObject projectileSpawner;
     public ParticleSystem blood;
+    public Rigidbody2D rb;
 
     public float timeToShoot;
     private float elapsedTime;
@@ -19,6 +20,7 @@ public class faceEnemy : MonoBehaviour
 
     private bool dead = false;
     private bool isActive = false;
+    private bool wallCollide = true;
 
 
 
@@ -65,7 +67,7 @@ public class faceEnemy : MonoBehaviour
             }
             projectileSpawner.transform.LookAt(player.transform);
 
-            transform.Translate(moveDir * moveSpeed * Time.deltaTime);
+            rb.velocity = moveDir * moveSpeed;
         }
     }
 
@@ -79,10 +81,15 @@ public class faceEnemy : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
-        if(other.collider.tag == "walls")
+        if(other.collider.tag == "walls" && wallCollide)
         {
-            moveDir.x = -moveDir.x;
-            moveDir.y = -moveDir.y;
+            StartCoroutine(NoCollide());
+            moveSpeed = -moveSpeed;
+        }
+        else if(other.collider.tag == "enemies" && wallCollide)
+        {
+            StartCoroutine(NoCollide());
+            moveSpeed = -moveSpeed;
         }
         else if(other.collider.tag == "Player" && !dead)
         {
@@ -119,6 +126,13 @@ public class faceEnemy : MonoBehaviour
     public void Activate()
     {
         isActive = true;
+    }
+
+    IEnumerator NoCollide()
+    {
+        wallCollide = false;
+        yield return new WaitForSeconds(0.01f);
+        wallCollide = true;
     }
 
 }

@@ -5074,8 +5074,8 @@ GameObject:
   - component: {fileID: 3733305139793138040}
   - component: {fileID: 3733305139793138046}
   - component: {fileID: 3733305139793138045}
-  - component: {fileID: 3733305139793138042}
   - component: {fileID: 3733305139793138041}
+  - component: {fileID: 8482513175008877347}
   m_Layer: 9
   m_Name: faceEnemy
   m_TagString: enemies
@@ -5137,25 +5137,10 @@ MonoBehaviour:
   anim: {fileID: 3733305139793138046}
   projectileSpawner: {fileID: 3733305140668390526}
   blood: {fileID: 625208557513382783}
+  rb: {fileID: 3733305139793138041}
   timeToShoot: 2.5
   moveSpeed: 4
   moveDir: {x: 1, y: 0, z: 0}
---- !u!58 &3733305139793138042
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3733305139793138044}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
 --- !u!50 &3733305139793138041
 Rigidbody2D:
   serializedVersion: 4
@@ -5176,7 +5161,23 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 7
+  m_Constraints: 4
+--- !u!58 &8482513175008877347
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3733305139793138044}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!1 &3733305140668390526
 GameObject:
   m_ObjectHideFlags: 0

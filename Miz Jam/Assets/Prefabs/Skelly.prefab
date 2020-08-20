@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 571596036435862987}
   - component: {fileID: 571596036435862985}
   - component: {fileID: 571596036435862991}
+  - component: {fileID: -6244124517086375274}
   m_Layer: 0
   m_Name: Skelly
   m_TagString: enemies
@@ -51,6 +52,7 @@ MonoBehaviour:
   blood: {fileID: 571596037660799113}
   player: {fileID: 0}
   anim: {fileID: 571596036435862991}
+  rb: {fileID: -6244124517086375274}
   dead: 0
   speed: 3
   aggro: 0
@@ -90,6 +92,27 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!50 &-6244124517086375274
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 571596036435862988}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &571596037660799116
 GameObject:
   m_ObjectHideFlags: 0

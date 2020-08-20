@@ -7,9 +7,10 @@ public class skellyEnemy : MonoBehaviour
     public ParticleSystem blood;
     public GameObject player;
     public Animator anim;
+    public Rigidbody2D rb;
 
     public bool dead = false;
-    public float speed = 3.0f;
+    public float speed = 10.0f;
     public bool aggro = false;
     public bool isActive = false;
 
@@ -24,7 +25,9 @@ public class skellyEnemy : MonoBehaviour
     {
         if(!dead && aggro && isActive)
         {
-            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime );
+            //transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime );
+            //rb.MovePosition(Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime ));
+            rb.velocity = player.transform.position - transform.position;
         }
     }
 
