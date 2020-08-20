@@ -32,6 +32,8 @@ public class playerController : MonoBehaviour
     public int maxHP = 3;
     public int currentHP = 3;
 
+    private float slashTime = 0.2f;
+
     private void Start ()
     {
         m_MoveAction = m_PlayerInput.actions["Move"];
@@ -39,17 +41,14 @@ public class playerController : MonoBehaviour
 
     private void Update ()
     {
-
-        if (rolling)
-        {
-            speed = 8.0f;
-            rb.velocity = m_move * speed;
-
-        }
-        else
+        if(!rolling)
         {
             speed = 8.0f;
             m_move = m_MoveAction.ReadValue<Vector2> ();
+            if(slashing)
+            {
+                m_move = Vector2.zero;
+            }
             rb.velocity = m_move * speed;
             anim.SetBool ("moving", m_move.magnitude > 0.1f);
 
@@ -123,44 +122,52 @@ public class playerController : MonoBehaviour
     {
         sword.SetActive(false);
         slashLeft.SetActive(true);
+        slashing = true;
 
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(slashTime);
 
         sword.SetActive(true);
         slashLeft.SetActive(false);
+        slashing = false;
     }
 
     public IEnumerator SwingSwordRight()
     {
         sword.SetActive(false);
         slashRight.SetActive(true);
+        slashing = true;
 
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(slashTime);
 
         sword.SetActive(true);
         slashRight.SetActive(false);
+        slashing = false;
     }
 
     public IEnumerator SwingSwordUp()
     {
         sword.SetActive(false);
         slashUp.SetActive(true);
+        slashing = true;
 
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(slashTime);
 
         sword.SetActive(true);
         slashUp.SetActive(false);
+        slashing = false;
     }
 
     public IEnumerator SwingSwordDown()
     {
         sword.SetActive(false);
         slashDown.SetActive(true);
+        slashing = true;
 
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(slashTime);
 
         sword.SetActive(true);
         slashDown.SetActive(false);
+        slashing = false;
     }
 
     IEnumerator rollingTimer ()

@@ -18,6 +18,7 @@ public class faceEnemy : MonoBehaviour
     public Vector3 moveDir = Vector3.right;
 
     private bool dead = false;
+    private bool isActive = false;
 
 
 
@@ -51,7 +52,7 @@ public class faceEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!dead)
+        if(!dead && isActive)
         {
             elapsedTime += Time.deltaTime;
             if(elapsedTime > timeToShoot)
@@ -77,13 +78,13 @@ public class faceEnemy : MonoBehaviour
         fireball.velocity = -dir.normalized * 5;
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
-        if(other.tag == "walls")
+    private void OnCollisionEnter2D(Collision2D other) {
+        if(other.collider.tag == "walls")
         {
             moveDir.x = -moveDir.x;
             moveDir.y = -moveDir.y;
         }
-        else if(other.tag == "Player" && !dead)
+        else if(other.collider.tag == "Player" && !dead)
         {
             other.gameObject.BroadcastMessage("OnHit");
         }
@@ -105,6 +106,7 @@ public class faceEnemy : MonoBehaviour
         Quaternion rot = Quaternion.AngleAxis(angle, Vector3.forward);
         blood.transform.rotation = rot;
         blood.Play();
+        anim.SetTrigger("death");
         StartCoroutine(DestroyDelay());
     }
 
@@ -113,4 +115,10 @@ public class faceEnemy : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
     }
+
+    public void Activate()
+    {
+        isActive = true;
+    }
+
 }
