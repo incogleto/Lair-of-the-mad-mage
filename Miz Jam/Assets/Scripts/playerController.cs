@@ -12,6 +12,8 @@ public class playerController : MonoBehaviour
     public ParticleSystem dust;
     public PlayerInput m_PlayerInput;
     public SpriteRenderer sprite;
+    public AudioSource audioSource;
+    public AudioClip[] swordClips;
     private InputAction m_MoveAction;
 
     public GameObject slashLeft;
@@ -112,6 +114,7 @@ public class playerController : MonoBehaviour
     {
         if(!rolling && !isDead)
         {
+            audioSource.PlayOneShot(swordClips[Random.Range(0, swordClips.Length)], Random.Range(0.7f, 1f));
             Vector3 dir =  Mouse.current.position.ReadValue();
             dir = Camera.main.ScreenToWorldPoint(dir);
             dir = transform.position - dir;

@@ -11,6 +11,7 @@ public class faceEnemy : MonoBehaviour
     public GameObject projectileSpawner;
     public ParticleSystem blood;
     public Rigidbody2D rb;
+    public AudioSource audioSource;
 
     public float timeToShoot;
     private float elapsedTime;
@@ -114,6 +115,7 @@ public class faceEnemy : MonoBehaviour
         blood.transform.rotation = rot;
         blood.Play();
         anim.SetTrigger("death");
+        audioSource.Play();
         StartCoroutine(DestroyDelay());
     }
 

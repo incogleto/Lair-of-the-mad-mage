@@ -7,6 +7,7 @@ public class roomManager : MonoBehaviour
     public List<GameObject> enemies;
     public List<door> doors;
     private bool enemiesPresent;
+    private bool doorsOpen = true;
     public BoxCollider2D enterTrigger;
 
     public bool left;
@@ -21,6 +22,10 @@ public class roomManager : MonoBehaviour
     public GameObject door_W_Spawn;
     public GameObject door_E_Spawn;
     public GameObject door_S_Spawn;
+
+    public AudioSource audioSource;
+    public AudioClip openSfx;
+    public AudioClip closeSfx;
 
 
     // Start is called before the first frame update
@@ -43,9 +48,14 @@ public class roomManager : MonoBehaviour
         }
         if(!enemiesPresent)
         {
-            foreach (var item in doors)
+            if(!doorsOpen)
             {
-                item.SendMessage("Open");
+                foreach (var item in doors)
+                {
+                    item.SendMessage("Open");
+                }
+                doorsOpen = true;
+                audioSource.PlayOneShot(openSfx);
             }
         }
     }
@@ -56,9 +66,14 @@ public class roomManager : MonoBehaviour
             {
                 item.BroadcastMessage("Activate");
             }
-            foreach (var item in doors)
+            if(doorsOpen)
             {
-                item.SendMessage("Close");
+                foreach (var item in doors)
+                {
+                        item.SendMessage("Close");
+                }
+                doorsOpen = false;
+                audioSource.PlayOneShot(closeSfx);
             }
             Destroy(enterTrigger);
         }

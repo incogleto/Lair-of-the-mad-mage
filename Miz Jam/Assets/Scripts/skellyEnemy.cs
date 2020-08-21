@@ -8,6 +8,7 @@ public class skellyEnemy : MonoBehaviour
     public GameObject player;
     public Animator anim;
     public Rigidbody2D rb;
+    public AudioSource audioSource;
 
     public bool dead = false;
     public float speed = 10.0f;
@@ -41,6 +42,7 @@ public class skellyEnemy : MonoBehaviour
         blood.transform.rotation = rot;
         anim.SetTrigger("death");
         blood.Play();
+        audioSource.Play();
         StartCoroutine(DestroyDelay());
     }
 
