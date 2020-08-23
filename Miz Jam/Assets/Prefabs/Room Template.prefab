@@ -132,7 +132,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4360232288276647045}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9, y: 0, z: 0}
+  m_LocalPosition: {x: -10, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7717267553649572198}
@@ -192,10 +192,7 @@ MonoBehaviour:
   enemies: []
   doors: []
   enterTrigger: {fileID: 7721901235811666381}
-  left: 0
-  right: 0
-  up: 0
-  down: 0
+  connections: 0
   size_x: 0
   size_y: 0
   door_N_Spawn: {fileID: 8610849115077949731}

@@ -13,7 +13,9 @@ public class playerController : MonoBehaviour
     public PlayerInput m_PlayerInput;
     public SpriteRenderer sprite;
     public AudioSource audioSource;
+    public AudioSource footsteps;
     public AudioClip[] swordClips;
+    public AudioClip hurtClip;
     private InputAction m_MoveAction;
 
     public GameObject slashLeft;
@@ -61,13 +63,14 @@ public class playerController : MonoBehaviour
                 //if(!dust.isPlaying) dust.Play();
                 ParticleSystem.EmissionModule em = dust.emission;
                 em.enabled = true;
-
+                footsteps.UnPause();
             }
             else
             {
                 //if(dust.isPlaying) dust.Stop();
                 ParticleSystem.EmissionModule em = dust.emission;
                 em.enabled = false;
+                footsteps.Pause();
             }
 
             if (rb.velocity.x > 0 && flipped == false)
@@ -105,6 +108,7 @@ public class playerController : MonoBehaviour
             anim.SetTrigger ("rolling");
             rolling = true;
             ParticleSystem.EmissionModule em = dust.emission;
+            footsteps.Pause();
             em.enabled = false;
             StartCoroutine (rollingTimer ());
         }
@@ -212,6 +216,7 @@ public class playerController : MonoBehaviour
         if(!rolling && !isInvulnerable && !isDead)
         {
             currentHP--;
+            audioSource.PlayOneShot(hurtClip);
             StartCoroutine(BecomeInvulnerable());
         }
     }

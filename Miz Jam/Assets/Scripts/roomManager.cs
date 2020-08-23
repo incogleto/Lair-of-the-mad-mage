@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class roomManager : MonoBehaviour
 {
@@ -10,10 +11,7 @@ public class roomManager : MonoBehaviour
     private bool doorsOpen = true;
     public BoxCollider2D enterTrigger;
 
-    public bool left;
-    public bool right;
-    public bool up;
-    public bool down;
+    public Direction connections;
 
     public int size_x;
     public int size_y;
@@ -66,7 +64,7 @@ public class roomManager : MonoBehaviour
             {
                 item.BroadcastMessage("Activate");
             }
-            if(doorsOpen)
+            if(doorsOpen && enemiesPresent)
             {
                 foreach (var item in doors)
                 {
