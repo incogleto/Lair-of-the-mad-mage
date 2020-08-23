@@ -263,4 +263,11 @@ public class playerController : MonoBehaviour
     {
         Application.Quit();
     }
+
+    private void OnPause()
+    {
+        if(Time.timeScale == 1)
+            Time.timeScale = 0;
+        else Time.timeScale = 1;
+    }
 }
