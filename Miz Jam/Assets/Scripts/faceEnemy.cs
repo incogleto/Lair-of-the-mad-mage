@@ -22,6 +22,7 @@ public class faceEnemy : MonoBehaviour
     private bool dead = false;
     private bool isActive = false;
     private bool wallCollide = true;
+    public GameObject meat;
 
 
 
@@ -123,6 +124,10 @@ public class faceEnemy : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
+        if(Random.Range(0,10) >= 8)
+        {
+            Instantiate(meat, transform);
+        }
     }
 
     public void Activate()

@@ -6,9 +6,10 @@ using System;
 public class roomManager : MonoBehaviour
 {
     public List<GameObject> enemies;
+    public List<GameObject> turrets;
     public List<door> doors;
-    private bool enemiesPresent;
-    private bool doorsOpen = true;
+    public bool enemiesPresent;
+    public bool doorsOpen = true;
     public BoxCollider2D enterTrigger;
 
     public Direction connections;
@@ -58,22 +59,4 @@ public class roomManager : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
-        if(other.tag == "Player"){
-            foreach (var item in enemies)
-            {
-                item.BroadcastMessage("Activate");
-            }
-            if(doorsOpen && enemiesPresent)
-            {
-                foreach (var item in doors)
-                {
-                        item.SendMessage("Close");
-                }
-                doorsOpen = false;
-                audioSource.PlayOneShot(closeSfx);
-            }
-            Destroy(enterTrigger);
-        }
-    }
 }

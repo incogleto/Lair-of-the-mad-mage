@@ -58,7 +58,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemies:
-  - {fileID: 0}
+  - {fileID: 6912338752081830203}
+  turrets: []
 --- !u!1001 &7514401427438212952
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -128,6 +129,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 90900e0743286f94e904afb82e0e28ea, type: 3}
+--- !u!1 &6912338752081830203 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4009623351732844131, guid: 90900e0743286f94e904afb82e0e28ea,
+    type: 3}
+  m_PrefabInstance: {fileID: 7514401427438212952}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6912338752081830200 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4009623351732844128, guid: 90900e0743286f94e904afb82e0e28ea,

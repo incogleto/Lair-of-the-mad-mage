@@ -20,19 +20,20 @@ public class madMage : MonoBehaviour
 
     private bool shielded = false;
     public int health = 3;
+    public bool isActive = false;
+    public uiManager ui;
 
     // Start is called before the first frame update
     void Start()
     {
         attackPattern1.angularVelocity = 70;
-        StartCoroutine(Attack1());
         player = GameObject.FindWithTag("Player");
+        ui = GameObject.FindWithTag("UI").GetComponent<uiManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     IEnumerator Attack1()
@@ -109,6 +110,10 @@ public class madMage : MonoBehaviour
             Quaternion rot = Quaternion.AngleAxis(angle, Vector3.forward);
             blood.transform.rotation = rot;
             blood.Play();
+            shield.SetActive(false);
+            shielded = false;
+            ui.SendMessage("OnVictory");
+            player.SendMessage("Victory");
         }
     }
 
@@ -128,5 +133,14 @@ public class madMage : MonoBehaviour
                 default: break;
             }
         }
+    }
+
+    public void Activate()
+    {
+        if(!isActive)
+        {
+            isActive = true;
+            StartCoroutine(Attack1());
+        }   
     }
 }

@@ -194,11 +194,19 @@ public class mapGenerator : MonoBehaviour
                 {
                     bossRoom = room;
                 }
+            }   
+        }
+        roomLayout bossroomLayout = Instantiate(bossLayout, bossRoom.position, Quaternion.identity);
+        bossRoom.roomManager.enemies = bossroomLayout.enemies;
+        foreach (var room in roomTree)
+        {
+            if(room != startNode && room != bossRoom)
+            {
+                roomLayout layout = Instantiate(layouts[Random.Range(0,layouts.Count)], room.roomManager.transform);
+                room.roomManager.enemies = layout.enemies;
+                room.roomManager.turrets = layout.turrets;
             }
         }
-        roomLayout layout = Instantiate(bossLayout, bossRoom.position, Quaternion.identity);
-        bossRoom.roomManager.enemies = layout.enemies;
-
     }
 
     void DebugGen()

@@ -16,6 +16,7 @@ public class playerController : MonoBehaviour
     public AudioSource footsteps;
     public AudioClip[] swordClips;
     public AudioClip hurtClip;
+    public AudioClip eatClip;
     private InputAction m_MoveAction;
 
     public GameObject slashLeft;
@@ -32,6 +33,7 @@ public class playerController : MonoBehaviour
 
     private bool isInvulnerable = false;
     private bool isDead = false;
+    public bool victorious = false;
 
     private bool slashing = false;
 
@@ -138,7 +140,7 @@ public class playerController : MonoBehaviour
 
     public void OnRestart(InputValue value)
     {
-        if(isDead)
+        if(isDead || victorious)
         {
             Scene scene = SceneManager.GetActiveScene();
             SceneManager.LoadScene(scene.name);
@@ -221,6 +223,13 @@ public class playerController : MonoBehaviour
         }
     }
 
+    public void OnHeal()
+    {
+        if(currentHP < maxHP)
+            currentHP++;
+        audioSource.PlayOneShot(eatClip);
+    }
+
     IEnumerator BecomeInvulnerable()
     {
         isInvulnerable = true;
@@ -243,5 +252,15 @@ public class playerController : MonoBehaviour
         sprite.color = Color.white;
 
         isInvulnerable = false;
+    }
+
+    private void Victory()
+    {
+        victorious = true;
+    }
+
+    private void OnExit()
+    {
+        Application.Quit();
     }
 }

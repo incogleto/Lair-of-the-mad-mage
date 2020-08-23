@@ -5143,6 +5143,7 @@ MonoBehaviour:
   timeToShoot: 2.5
   moveSpeed: 4
   moveDir: {x: 1, y: 0, z: 0}
+  meat: {fileID: 8742083431822434133, guid: d02b5e29e6126a148b73de9c7f010ebd, type: 3}
 --- !u!50 &3733305139793138041
 Rigidbody2D:
   serializedVersion: 4

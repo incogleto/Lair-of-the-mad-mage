@@ -59,6 +59,7 @@ MonoBehaviour:
   speed: 3
   aggro: 1
   isActive: 0
+  meat: {fileID: 8742083431822434133, guid: d02b5e29e6126a148b73de9c7f010ebd, type: 3}
 --- !u!70 &571596036435862985
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

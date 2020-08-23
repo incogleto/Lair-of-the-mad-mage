@@ -14,6 +14,7 @@ public class skellyEnemy : MonoBehaviour
     public float speed = 10.0f;
     public bool aggro = false;
     public bool isActive = false;
+    public GameObject meat;
 
     // Start is called before the first frame update
     void Start()
@@ -49,6 +50,11 @@ public class skellyEnemy : MonoBehaviour
     private IEnumerator DestroyDelay()
     {
         yield return new WaitForSeconds(0.5f);
+        Debug.Log(Random.Range(0,10));
+        if(Random.Range(0,10) >= 8)
+        {
+            Instantiate(meat, transform.position, Quaternion.identity);
+        }
         Destroy(gameObject);
     }
 

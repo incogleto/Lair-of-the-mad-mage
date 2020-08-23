@@ -13,6 +13,7 @@ public class uiManager : MonoBehaviour
     public playerController player;
 
     public Text gameOverText;
+    public Text victoryText;
     // Start is called before the first frame update
     void Start()
     {
@@ -50,5 +51,10 @@ public class uiManager : MonoBehaviour
         {
             fullHeart3.SetActive(false);
         }
+    }
+
+    public void OnVictory()
+    {
+        victoryText.gameObject.SetActive(true);
     }
 }
