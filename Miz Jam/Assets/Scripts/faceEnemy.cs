@@ -103,7 +103,8 @@ public class faceEnemy : MonoBehaviour
     {
         yield return new WaitForSeconds(0.50f);
 
-        Shoot();
+        if(!dead)
+            Shoot();
         
     }
 
